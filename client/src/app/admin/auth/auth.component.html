@@ -1,0 +1,74 @@
+<div class="auth-container d-flex align-items-center justify-content-center" style="min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+  <div class="card shadow-lg" style="width: 100%; max-width: 400px;">
+    <div class="card-body p-5">
+      <!-- Logo/Header -->
+      <div class="text-center mb-4">
+        <h2 class="card-title mb-2">Administrator Login</h2>
+      </div>
+
+      <!-- Login Form -->
+      <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input 
+            type="text" 
+            class="form-control form-control-lg"
+            id="username"
+            name="username" 
+            [(ngModel)]="model.username"
+            placeholder="Enter your username"
+            [disabled]="loading"
+            required>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input 
+            type="password" 
+            class="form-control form-control-lg"
+            id="password"
+            name="password" 
+            [(ngModel)]="model.password"
+            placeholder="Enter your password"
+            [disabled]="loading"
+            required>
+        </div>
+
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="remember" [disabled]="loading">
+          <label class="form-check-label" for="remember">
+            Remember me
+          </label>
+        </div>
+
+        <button 
+          type="submit" 
+          class="btn btn-primary btn-lg w-100 mb-3"
+          [disabled]="!loginForm.valid || loading">
+          <span *ngIf="!loading"><i class="fas fa-sign-in-alt"></i> Login</span>
+          <span *ngIf="loading">
+            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            Logging in...
+          </span>
+        </button>
+      </form>
+
+      <!-- Error Alert -->
+      <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> {{ error }}
+        <button type="button" class="btn-close" (click)="error = ''"></button>
+      </div>
+
+      <!-- <hr> -->
+
+      <!-- Demo Credentials -->
+      <!-- <div class="alert alert-info alert-sm mb-0">
+        <small>
+          <strong>Demo Credentials:</strong><br>
+          Username: <code>admin</code><br>
+          Password: <code>password123</code>
+        </small>
+      </div> -->
+    </div>
+  </div>
+</div>

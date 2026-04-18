@@ -1,0 +1,31 @@
+<nav class="admin-navbar">
+  <div class="navbar-container">
+    <!-- Brand -->
+    <div class="navbar-brand">
+      <span class="brand-icon">🏢</span>
+      <span class="brand-text">Admin Panel</span>
+    </div>
+
+    <!-- Navigation Menu -->
+    <ul class="navbar-menu">
+      <li class="nav-item">
+        <a routerLink="/admin/dashboard" routerLinkActive="active" class="nav-link">
+          <i class="icon">📊</i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/admin/sites" routerLinkActive="active" class="nav-link">
+          <i class="icon">🏗️</i>
+          <span>Manage Sites</span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Logout Button -->
+    <button (click)="logout()" class="btn-logout">
+      <i class="icon">🚪</i>
+      <span>Logout</span>
+    </button>
+  </div>
+</nav>

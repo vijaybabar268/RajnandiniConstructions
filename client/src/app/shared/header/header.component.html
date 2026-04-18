@@ -1,0 +1,25 @@
+<nav [ngClass]="{'navbar-admin': isAdminSection, 'navbar': !isAdminSection}" class="navbar-expand-lg navbar-dark shadow-sm">
+  <div class="container-fluid px-3">
+    <!-- Brand -->
+    <a routerLink="/" routerLinkActive="active" class="navbar-brand fw-bold" href="#">Rajnandini Constructions</a>
+
+    <!-- Navigation Items (Hidden in Admin) -->
+    <div class="collapse navbar-collapse" id="navbarNav" *ngIf="!isAdminSection">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <!-- User Dropdown -->
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a routerLink="/admin/login" routerLinkActive="active" class="nav-link" href="#">Admin login</a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isLoggedIn">
+          <a routerLink="/admin/login" routerLinkActive="active" class="nav-link" href="#">Admin login</a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

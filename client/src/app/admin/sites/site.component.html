@@ -1,0 +1,114 @@
+<div class="sites-container">
+  <div class="page-header mb-4 d-flex justify-content-between align-items-center">
+    <div>
+      <h1 class="page-title">Sites Management</h1>
+      <p class="text-muted">Manage all construction sites and projects</p>
+    </div>
+    <button class="btn btn-primary">
+      <i class="fas fa-plus"></i> Add New Site
+    </button>
+  </div>
+
+  <!-- Search and Filters -->
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <input type="text" class="form-control" placeholder="Search sites...">
+    </div>
+    <div class="col-md-3">
+      <select class="form-select">
+        <option value="">All Status</option>
+        <option value="active">Active</option>
+        <option value="completed">Completed</option>
+        <option value="on-hold">On Hold</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-outline-secondary w-100">Filter</button>
+    </div>
+  </div>
+
+  <!-- Sites Table -->
+  <div class="card">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Site Name</th>
+            <th>Location</th>
+            <th>Project Type</th>
+            <th>Status</th>
+            <th>Progress</th>
+            <th>Start Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let site of [
+            {id: 1, name: 'Residential Complex - Phase 1', location: 'Downtown', type: 'Residential', status: 'Active', progress: 75, date: '2025-01-15'},
+            {id: 2, name: 'Commercial Plaza', location: 'Business District', type: 'Commercial', status: 'In Progress', progress: 50, date: '2025-02-01'},
+            {id: 3, name: 'School Building', location: 'Suburb', type: 'Institutional', status: 'Planned', progress: 20, date: '2025-04-20'},
+            {id: 4, name: 'Shopping Mall Extension', location: 'City Center', type: 'Commercial', status: 'Completed', progress: 100, date: '2024-06-10'},
+            {id: 5, name: 'Residential Apartments', location: 'East Wing', type: 'Residential', status: 'Active', progress: 60, date: '2025-03-05'}
+          ]">
+            <td>
+              <strong>{{ site.name }}</strong>
+            </td>
+            <td>{{ site.location }}</td>
+            <td>
+              <span class="badge bg-light text-dark">{{ site.type }}</span>
+            </td>
+            <td>
+              <span class="badge" [ngClass]="{
+                'bg-success': site.status === 'Active',
+                'bg-warning': site.status === 'In Progress',
+                'bg-info': site.status === 'Planned',
+                'bg-secondary': site.status === 'Completed'
+              }">
+                {{ site.status }}
+              </span>
+            </td>
+            <td>
+              <div class="progress" style="height: 20px; width: 120px;">
+                <div class="progress-bar" [style.width.%]="site.progress" [ngClass]="{
+                  'bg-success': site.progress >= 75,
+                  'bg-warning': site.progress >= 50 && site.progress < 75,
+                  'bg-info': site.progress < 50
+                }">
+                  {{ site.progress }}%
+                </div>
+              </div>
+            </td>
+            <td>{{ site.date | date: 'short' }}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-info me-1" title="View Details">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-danger" title="Delete">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-between align-items-center mt-3">
+    <div class="text-muted">
+      Showing 1 to 5 of 15 sites
+    </div>
+    <nav>
+      <ul class="pagination mb-0">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>

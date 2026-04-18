@@ -1,0 +1,18 @@
+.hero-section {
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+section {
+  scroll-margin-top: 80px;
+}

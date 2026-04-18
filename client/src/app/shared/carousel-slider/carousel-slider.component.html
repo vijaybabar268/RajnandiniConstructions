@@ -1,0 +1,44 @@
+<div class="carousel-container">
+  <div class="carousel-wrapper">
+    <!-- Slides -->
+    <div class="carousel-slides">
+      <div 
+        *ngFor="let slide of slides; let i = index"
+        class="carousel-slide"
+        [class.active]="i === currentSlide"
+        [style.backgroundImage]="'url(' + slide.image + ')'"
+      >
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="slide-badge" [ngClass]="{
+            'badge-success': slide.badge === 'Completed',
+            'badge-warning': slide.badge === 'In Progress',
+            'badge-info': slide.badge === 'Active'
+          }">
+            {{ slide.badge }}
+          </span>
+          <h2 class="slide-title">{{ slide.title }}</h2>
+          <p class="slide-description">{{ slide.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button class="carousel-nav prev" (click)="prevSlide()">
+      <span>&#10094;</span>
+    </button>
+    <button class="carousel-nav next" (click)="nextSlide()">
+      <span>&#10095;</span>
+    </button>
+
+    <!-- Dot Indicators -->
+    <div class="carousel-dots">
+      <span 
+        *ngFor="let slide of slides; let i = index"
+        class="dot"
+        [class.active]="i === currentSlide"
+        (click)="goToSlide(i)"
+      ></span>
+    </div>
+  </div>
+</div>
