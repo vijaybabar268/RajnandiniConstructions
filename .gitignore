@@ -3,5 +3,9 @@ API/obj
 .vscode
 API/Data/Migrations
 BuildHost-*
-API/bin/Debug
-API/obj/Debug/net10.0/rjsmcshtml.dswa.cache.json
+API/rajnandiniconstruction.db-shm
+API/rajnandiniconstruction.db-wal
+client/node_modules
+client/dist
+.angular
+*.log

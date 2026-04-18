@@ -1,173 +1,134 @@
 <div class="dashboard-container">
+  <!-- Page Header -->
   <div class="page-header mb-4">
-    <h1 class="page-title">Dashboard</h1>
-    <p class="text-muted">Welcome to Rajnandini Constructions Admin Panel</p>
+    <h1 class="page-title">Rajnandini Constructions</h1>
   </div>
 
-  <!-- Stats Section -->
-  <div class="row mb-4">
-    <div class="col-lg-3 col-md-6">
-      <div class="card stat-card">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <p class="text-muted mb-1">Total Projects</p>
-              <h3 class="mb-0">15</h3>
-            </div>
-            <span class="badge bg-info">📊</span>
+  <!-- Stats Cards Grid -->
+  <div class="stats-grid">
+    <mat-card *ngFor="let stat of statCards" [ngClass]="'stat-card ' + stat.bgClass" class="stat-card-material">
+      <mat-card-content>
+        <div class="stat-content">
+          <div class="stat-info">
+            <p class="stat-label">{{ stat.title }}</p>
+            <h2 class="stat-value">{{ stat.value }}</h2>
+          </div>
+          <div class="stat-icon">
+            <mat-icon>{{ stat.icon }}</mat-icon>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="col-lg-3 col-md-6">
-      <div class="card stat-card">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <p class="text-muted mb-1">Active Sites</p>
-              <h3 class="mb-0">8</h3>
-            </div>
-            <span class="badge bg-success">🏗️</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-3 col-md-6">
-      <div class="card stat-card">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <p class="text-muted mb-1">Completed</p>
-              <h3 class="mb-0">5</h3>
-            </div>
-            <span class="badge bg-warning">✓</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-3 col-md-6">
-      <div class="card stat-card">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-start">
-            <div>
-              <p class="text-muted mb-1">Total Revenue</p>
-              <h3 class="mb-0">₹2.5Cr</h3>
-            </div>
-            <span class="badge bg-primary">💰</span>
-          </div>
-        </div>
-      </div>
-    </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 
-  <!-- Recent Projects Section -->
-  <div class="row">
-    <div class="col-lg-8">
-      <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="card-title mb-0">Recent Projects</h5>
-          <a href="#" class="btn btn-sm btn-primary">View All</a>
-        </div>
-        <div class="card-body p-0">
-          <div class="table-responsive">
-            <table class="table table-hover mb-0">
-              <thead class="table-light">
-                <tr>
-                  <th>Project Name</th>
-                  <th>Location</th>
-                  <th>Status</th>
-                  <th>Progress</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Residential Complex - Phase 1</strong></td>
-                  <td>Downtown Area</td>
-                  <td><span class="badge bg-success">Active</span></td>
-                  <td>
-                    <div class="progress" style="height: 20px;">
-                      <div class="progress-bar bg-success" style="width: 75%;">75%</div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td><strong>Commercial Plaza</strong></td>
-                  <td>Business District</td>
-                  <td><span class="badge bg-warning">In Progress</span></td>
-                  <td>
-                    <div class="progress" style="height: 20px;">
-                      <div class="progress-bar bg-warning" style="width: 50%;">50%</div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td><strong>School Building</strong></td>
-                  <td>Suburb</td>
-                  <td><span class="badge bg-info">Planned</span></td>
-                  <td>
-                    <div class="progress" style="height: 20px;">
-                      <div class="progress-bar bg-info" style="width: 20%;">20%</div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Recent Sites Section -->
+  <div class="recent-section">
+    <mat-card class="recent-card">
+      <mat-card-header>
+        <mat-card-title>Recent Sites</mat-card-title>
+        <button mat-button color="primary" routerLink="/admin/sites">View All</button>
+      </mat-card-header>
+      <mat-card-content class="table-content">
+        <div class="mat-elevation-z1">
+          <table mat-table [dataSource]="recentSites" class="dashboard-table">
+            <!-- Project Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Project Name</th>
+              <td mat-cell *matCellDef="let site"><strong>{{ site.name }}</strong></td>
+            </ng-container>
 
-    <!-- Quick Actions -->
-    <div class="col-lg-4">
-      <div class="card">
-        <div class="card-header">
-          <h5 class="card-title mb-0">Quick Actions</h5>
-        </div>
-        <div class="card-body">
-          <button class="btn btn-primary w-100 mb-2">
-            <i class="fas fa-plus"></i> Add New Project
-          </button>
-          <button class="btn btn-outline-primary w-100 mb-2">
-            <i class="fas fa-map-marker"></i> Manage Sites
-          </button>
-          <button class="btn btn-outline-primary w-100 mb-2">
-            <i class="fas fa-file-pdf"></i> Generate Report
-          </button>
-          <button class="btn btn-outline-primary w-100">
-            <i class="fas fa-cog"></i> Settings
-          </button>
-        </div>
-      </div>
+            <!-- Location Column -->
+            <ng-container matColumnDef="location">
+              <th mat-header-cell *matHeaderCellDef>Location</th>
+              <td mat-cell *matCellDef="let site">{{ site.location }}</td>
+            </ng-container>
 
-      <!-- Project Status Summary -->
-      <div class="card mt-3">
-        <div class="card-header">
-          <h5 class="card-title mb-0">Status Summary</h5>
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let site">
+                <mat-chip-set>
+                  <mat-chip [color]="getStatusColor(site.status)" selected>
+                    {{ site.status }}
+                  </mat-chip>
+                </mat-chip-set>
+              </td>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="progress">
+              <th mat-header-cell *matHeaderCellDef>Progress</th>
+              <td mat-cell *matCellDef="let site">
+                <div class="progress-cell">
+                  <mat-progress-bar 
+                    mode="determinate" 
+                    [value]="site.progress"
+                    [color]="getProgressColor(site.progress)">
+                  </mat-progress-bar>
+                  <span class="progress-text">{{ site.progress }}%</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
         </div>
-        <div class="card-body">
-          <div class="mb-3">
-            <div class="d-flex justify-content-between mb-1">
-              <span>Active</span>
-              <span class="badge bg-success">8</span>
-            </div>
-          </div>
-          <div class="mb-3">
-            <div class="d-flex justify-content-between mb-1">
-              <span>On Hold</span>
-              <span class="badge bg-warning">2</span>
-            </div>
-          </div>
-          <div>
-            <div class="d-flex justify-content-between mb-1">
-              <span>Completed</span>
-              <span class="badge bg-success">5</span>
-            </div>
-          </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Quick Actions and Summary -->
+  <div class="bottom-section">
+    <!-- Quick Actions Card -->
+    <mat-card class="quick-actions-card">
+      <mat-card-header>
+        <mat-card-title>Quick Actions</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="actions-grid">
+          <button mat-raised-button color="primary" (click)="quickAction('add-project')">
+            <mat-icon>add</mat-icon>
+            Add New Site
+          </button>
+          <button mat-raised-button (click)="quickAction('manage-sites')" routerLink="/admin/sites">
+            <mat-icon>location_on</mat-icon>
+            Manage Sites
+          </button>
+          <button mat-raised-button (click)="quickAction('report')">
+            <mat-icon>description</mat-icon>
+            Generate Report
+          </button>
+          <button mat-raised-button (click)="quickAction('settings')">
+            <mat-icon>settings</mat-icon>
+            Settings
+          </button>
         </div>
-      </div>
-    </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Status Summary Card -->
+    <mat-card class="summary-card">
+      <mat-card-header>
+        <mat-card-title>Status Summary</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="summary-item">
+          <span class="summary-label">Total Projects:</span>
+          <mat-chip-set>
+            <mat-chip color="primary" selected>15</mat-chip>
+          </mat-chip-set>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Completion Rate:</span>
+          <mat-progress-bar mode="determinate" value="60" color="accent"></mat-progress-bar>
+          <span class="progress-text mt-2">60%</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Last Updated:</span>
+          <span class="updated-time">Just now</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
