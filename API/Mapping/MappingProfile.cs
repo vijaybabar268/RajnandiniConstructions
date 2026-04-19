@@ -13,6 +13,8 @@ public class MappingProfile : Profile
         CreateMap<SaveSiteDto, Site>()
             .ForMember(d => d.Status, o => o.Ignore());
 
+        CreateMap<Status, StatusDto>();
+
         // DTOs to Domains
         CreateMap<Site, SiteDto>().ReverseMap();
     }

@@ -21,7 +21,7 @@
             <td>{{ site.description }}</td>
             <td>{{ site.startDate }}</td>
             <td>{{ site.endDate }}</td>
-            <td>{{ site.statusId }}</td>
+            <td>{{ site.status.name }}</td>
             <td>
                 <a class="btn btn-primary" [routerLink]="['/admin/sites/', site.id]">Edit</a> &nbsp;
                 <a class="btn btn-info" [routerLink]="['/admin/sites/view/', site.id]">Details</a> &nbsp;

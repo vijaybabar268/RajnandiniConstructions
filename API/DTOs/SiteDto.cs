@@ -9,4 +9,5 @@ public class SiteDto
     public DateTime EndDate { get; set; }
     
     public int StatusId { get; set; }
+    public StatusDto Status { get; set; }
 }
