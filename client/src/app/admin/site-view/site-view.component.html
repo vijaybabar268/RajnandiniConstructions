@@ -1,0 +1,24 @@
+<div class="row mb-3">
+    <div class="col-md-4">
+        <label for="title"><strong>Title: </strong> {{ site.title }}</label>
+    </div>
+    <div class="col-md-4">
+        <label for="description"><strong>Description: </strong> {{ site.description }}</label>
+    </div>
+    <div class="col-md-4">
+        <label for="startDate"><strong>Start Date: </strong> {{ site.startDate }}</label>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-md-4">
+        <label for="endDate"><strong>End Date: </strong> {{ site.endDate }}</label>
+        <span></span>
+    </div>
+    <div class="col-md-4">
+        <label for="status"><strong>Status: </strong> {{ site.statusId }}</label>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+
+<button type="button" class="btn btn-warning" routerLink="/admin/sites">Back to Site List</button>

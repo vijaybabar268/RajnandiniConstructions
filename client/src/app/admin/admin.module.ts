@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { SiteComponent } from './sites/site.component';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
 import { SharedModule } from '../shared/shared.module';
@@ -24,6 +23,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
+import { SiteFormComponent } from './site-form/site-form.component';
+import { SiteListComponent } from './site-list/site-list.component';
+import { SiteViewComponent } from './site-view/site-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -33,7 +35,10 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'sites', component: SiteComponent }
+      { path: 'sites', component: SiteListComponent },
+      { path: 'sites/new', component: SiteFormComponent },
+      { path: 'sites/:id', component: SiteFormComponent },
+      { path: 'sites/view/:id', component: SiteViewComponent }
     ]
   }
 ];
@@ -42,9 +47,11 @@ const routes: Routes = [
   declarations: [    
     AuthComponent,
     DashboardComponent,
-    SiteComponent,
     AdminLayoutComponent,
-    AdminNavbarComponent    
+    AdminNavbarComponent,
+    SiteFormComponent,
+    SiteListComponent,
+    SiteViewComponent    
   ],
   imports: [
     CommonModule,
