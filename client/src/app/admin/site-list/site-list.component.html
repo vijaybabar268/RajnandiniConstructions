@@ -1,32 +1,32 @@
-<h2 class="text-center">Site List</h2>
+<div style="width: 50%; margin: 0 auto;">
+    <h4 class="text-center">Site List</h4>
 
-<p class="mt-4">
-    <a [routerLink]="['/admin/sites/new']" class="btn btn-primary">New Site</a>
-</p>
+    <p class="mt-4">
+        <a [routerLink]="['/admin/sites/new']" class="btn btn-primary">New Site</a>
+    </p>
 
-<table class="table table-bordered mt-4">
-    <thead>
-        <tr>
-            <th>Site Name</th>
-            <th>Description</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let site of sites">
-            <td>{{ site.title }}</td>
-            <td>{{ site.description }}</td>
-            <td>{{ site.startDate }}</td>
-            <td>{{ site.endDate }}</td>
-            <td>{{ site.status.name }}</td>
-            <td>
-                <a class="btn btn-primary" [routerLink]="['/admin/sites/', site.id]">Edit</a> &nbsp;
-                <a class="btn btn-info" [routerLink]="['/admin/sites/view/', site.id]">Details</a> &nbsp;
-                <a class="btn btn-danger" (click)="delete(site.id)">Delete</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Site Name</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let site of sites">
+                <td>{{ site.title }}</td>
+                <td>{{ site.description }}</td>
+                <td>{{ site.startDate }}</td>
+                <td>{{ site.endDate }}</td>
+                <td>{{ site.status.name }}</td>
+                <td>
+                    <a class="btn-link" [routerLink]="['/admin/sites/view/', site.id]" style="text-decoration: none;">View</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

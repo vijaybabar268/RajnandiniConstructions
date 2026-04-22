@@ -1,24 +1,35 @@
-<div class="row mb-3">
-    <div class="col-md-4">
-        <label for="title"><strong>Title: </strong> {{ site.title }}</label>
+<div style="width: 50%; margin: 0 auto;">
+  <!-- Tab Navs -->
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab">Site</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab">Photos</button>
+    </li>
+  </ul>
+
+  <!-- Tab Content -->
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <h5 class="mt-3">Info</h5>
+      <ul>
+          <li>Title: {{ site.title }}</li>
+          <li>Description: {{ site.description }}</li>
+          <li>Start Date: {{ site.startDate }}</li>
+          <li>End Date: {{ site.endDate }}</li>
+          <li>Status: {{ site.statusId }}</li>        
+      </ul>
+      <a class="btn btn-primary" [routerLink]="['/admin/sites/', site.id]">Edit</a> &nbsp;    
+      <a class="btn btn-danger me-2" (click)="delete(site.id)">Delete</a>
+      <a class="btn btn-info" [routerLink]="['/admin/sites']">View All Sites</a> &nbsp;
     </div>
-    <div class="col-md-4">
-        <label for="description"><strong>Description: </strong> {{ site.description }}</label>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <h5 class="mt-3">Photos</h5>
+      <ul>
+          <li>Title: {{ site.title }}</li>
+      </ul>
     </div>
-    <div class="col-md-4">
-        <label for="startDate"><strong>Start Date: </strong> {{ site.startDate }}</label>
-    </div>
-</div>
-<div class="row mb-3">
-    <div class="col-md-4">
-        <label for="endDate"><strong>End Date: </strong> {{ site.endDate }}</label>
-        <span></span>
-    </div>
-    <div class="col-md-4">
-        <label for="status"><strong>Status: </strong> {{ site.status?.name }}</label>
-    </div>
-    <div class="col-md-4">
-    </div>
+  </div>
 </div>
 
-<button type="button" class="btn btn-warning" routerLink="/admin/sites">Back to Site List</button>

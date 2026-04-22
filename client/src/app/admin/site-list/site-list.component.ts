@@ -26,18 +26,4 @@ export class SiteListComponent implements OnInit {
       complete: () => console.log("Request completed")
     })
   }
-  
-  delete(id: number) {
-    if (confirm("Are you sure?")) {
-      this.siteService.delete(id).subscribe(
-        x => {
-          alert("Deleted vehicle successfully.");
-          this.router.navigate(['/vehicles']);
-          this.getSites();
-        },
-        err => {
-          alert("Error while deleting vehicle: "+ err);
-        }
-      );
-  }}
 }
