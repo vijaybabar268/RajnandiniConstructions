@@ -3,6 +3,7 @@
 using System.Text;
 using API.Admin.Services;
 using API.Data;
+using API.Entities;
 using API.Mapping;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -35,6 +36,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false     
          };
    });
+
+builder.Services.Configure<PhotoSettings>(builder.Configuration.GetSection("PhotoSettings"));
 
 
 // Configure the HTTP request pipeline.

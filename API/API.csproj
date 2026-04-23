@@ -22,6 +22,8 @@
     <Folder Include="Helpers\" />
     <Folder Include="Mapping\" />
     <Folder Include="Repositories\" />
+    <Folder Include="uploads\" />
+    <Folder Include="uploads\admin\" />
   </ItemGroup>
 
 </Project>

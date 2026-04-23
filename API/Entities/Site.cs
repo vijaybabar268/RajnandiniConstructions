@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+
 namespace API.Entities;
 
 public class Site
@@ -10,4 +12,7 @@ public class Site
     
     public int StatusId { get; set; }
     public Status Status { get; set; }
+
+    public ICollection<Photo> Photos { get; set; } = new Collection<Photo>();
+
 }

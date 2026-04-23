@@ -15,6 +15,8 @@ public class MappingProfile : Profile
 
         CreateMap<Status, StatusDto>();
 
+        CreateMap<Photo, PhotoDto>();
+
         // DTOs to Domains
         CreateMap<Site, SiteDto>().ReverseMap();
     }
