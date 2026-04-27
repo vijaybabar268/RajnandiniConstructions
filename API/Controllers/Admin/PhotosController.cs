@@ -14,15 +14,15 @@ public class PhotosController : ControllerBase
     private readonly DataContext _context;
     private readonly IHostEnvironment _host;
     private readonly IMapper _mapper;
-    private readonly IOptions<PhotoSettings> _photoSettings;
+    private readonly IOptionsSnapshot<PhotoSettings> _photoSettings;
 
     public PhotosController(DataContext context, IHostEnvironment host, IMapper mapper, 
-        IOptions<PhotoSettings> photoSettings)
+        IOptionsSnapshot<PhotoSettings> photoSettings)
     {
         _context = context;
         _host = host;
         _mapper = mapper;
-        _photoSettings = (IOptions<PhotoSettings>)photoSettings.Value;
+        _photoSettings = photoSettings;
     }
 
     [HttpPost]
@@ -41,7 +41,7 @@ public class PhotosController : ControllerBase
         if (file.Length > _photoSettings.Value.MaxBytes)
             return BadRequest("Max file size exceeded");
 
-        if (_photoSettings.Value.IsSupported(file.FileName))
+        if (!_photoSettings.Value.IsSupported(file.FileName))
             return BadRequest("Invalid file type");
 
         var uploadPolderPath = Path.Combine(_host.ContentRootPath, "uploads/admin");

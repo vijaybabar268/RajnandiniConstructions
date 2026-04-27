@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SiteService } from '../_services/site.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PhotoService } from '../_services/photo.service';
 
 @Component({
   selector: 'app-site-view',
@@ -12,15 +13,18 @@ export class SiteViewComponent implements OnInit {
   site: any = {};
   siteId: number = 0;
   title: string = "Site Details";
+  @ViewChild('fileInput') fileInput!: ElementRef;
 
   constructor(
-    private siteService: SiteService, 
+    private siteService: SiteService,
+    private photoService: PhotoService, 
     private router: Router, 
     private route: ActivatedRoute) {
       
     route.params.subscribe(p => {
       var id = (isNaN(Number(p['id']))) ? 0 : Number(p['id']);
       this.site.id = id;
+      this.siteId = id;
     })
   }
 
@@ -61,5 +65,22 @@ export class SiteViewComponent implements OnInit {
         }
       );
   }}
+
+  uploadPhoto() {
+    var nativeElement: HTMLInputElement = this.fileInput.nativeElement;
+    const files = nativeElement.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      this.photoService.upload(this.siteId, file).subscribe(
+        x => {
+          console.log(x);        
+          // this.router.navigate(['/admin/sites']);
+        },
+        err => {
+          alert("Error while uploading photos: "+ err);
+        }
+      );
+    }
+  }
 
 }

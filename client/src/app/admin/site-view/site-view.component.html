@@ -18,17 +18,17 @@
           <li>Description: {{ site.description }}</li>
           <li>Start Date: {{ site.startDate }}</li>
           <li>End Date: {{ site.endDate }}</li>
-          <li>Status: {{ site.statusId }}</li>        
+          <li>Status: {{ site.status?.name }}</li>     
       </ul>
       <a class="btn btn-primary" [routerLink]="['/admin/sites/', site.id]">Edit</a> &nbsp;    
       <a class="btn btn-danger me-2" (click)="delete(site.id)">Delete</a>
       <a class="btn btn-info" [routerLink]="['/admin/sites']">View All Sites</a> &nbsp;
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <h5 class="mt-3">Photos</h5>
-      <ul>
-          <li>Title: {{ site.title }}</li>
-      </ul>
+      <h5 class="mt-3">Add Photos</h5>
+      <input type="file" (change)="uploadPhoto()" #fileInput/>
+      <hr/>
+      
     </div>
   </div>
 </div>

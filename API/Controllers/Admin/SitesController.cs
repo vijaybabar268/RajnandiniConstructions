@@ -48,6 +48,10 @@ public class SitesController : ControllerBase
 
         var site = _mapper.Map<Site>(siteDto);
 
+        var statusExists = await _context.Status.AnyAsync(s => s.Id == site.StatusId);
+        if (!statusExists)
+            return BadRequest(new { StatusId = "Invalid StatusId" });
+
         _context.Sites.Add(site);
         await _context.SaveChangesAsync();
 
@@ -66,6 +70,10 @@ public class SitesController : ControllerBase
         if (site == null)
             return NotFound();
 
+        var statusExists = await _context.Status.AnyAsync(s => s.Id == siteDto.StatusId);
+        if (!statusExists)
+            return BadRequest(new { StatusId = "Invalid StatusId" });
+
         _mapper.Map(siteDto, site);
 
         _context.Sites.Update(site);
@@ -77,9 +85,13 @@ public class SitesController : ControllerBase
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteSite(int id)
     {
-        var site = await _context.Sites.FindAsync(id);
+        var site = await _context.Sites.FirstOrDefaultAsync(x=> x.Id == id);
         if (site == null)
             return NotFound();
+
+        // Remove any photos that reference this site to avoid FK constraint failures.
+        // Use raw SQL here because the `Photo` entity in the model does not expose a SiteId property.
+        await _context.Database.ExecuteSqlRawAsync("DELETE FROM Photos WHERE SiteId = {0}", id);
 
         _context.Sites.Remove(site);
         await _context.SaveChangesAsync();
