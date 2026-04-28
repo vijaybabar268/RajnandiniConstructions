@@ -9,6 +9,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +46,17 @@ builder.Services.Configure<PhotoSettings>(builder.Configuration.GetSection("Phot
 var app = builder.Build();
 
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200","https://localhost:4200"));
+
+// Serve uploaded files from /uploads
+var uploadsPath = Path.Combine(builder.Environment.ContentRootPath, "uploads/admin");
+if (!Directory.Exists(uploadsPath))
+   Directory.CreateDirectory(uploadsPath);
+
+app.UseStaticFiles(new StaticFileOptions
+{
+   FileProvider = new PhysicalFileProvider(uploadsPath),
+   RequestPath = "/uploads/admin"
+});
 
 // app.UseHttpsRedirection();
 

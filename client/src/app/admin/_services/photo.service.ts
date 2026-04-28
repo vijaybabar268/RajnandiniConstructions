@@ -16,4 +16,8 @@ export class PhotoService {
     return this.http.post(`${this.baseUrl}sites/${siteId}/photos`, formData);
   }
 
+  getPhotos(siteId: number) {
+    return this.http.get(`${this.baseUrl}sites/${siteId}/photos`);
+  }
+
 }

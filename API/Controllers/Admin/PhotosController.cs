@@ -3,6 +3,7 @@ using API.DTOs;
 using API.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace API.Controllers.Admin;
@@ -23,6 +24,15 @@ public class PhotosController : ControllerBase
         _host = host;
         _mapper = mapper;
         _photoSettings = photoSettings;
+    }
+
+    [HttpGet]
+    public async Task<IEnumerable<PhotoDto>> GetPhotos(int siteId)
+    {
+        var photos = await _context.Photos
+            .Where(p => p.SiteId == siteId).ToListAsync();
+
+        return _mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoDto>>(photos);
     }
 
     [HttpPost]
