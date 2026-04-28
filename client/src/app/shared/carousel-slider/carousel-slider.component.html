@@ -6,7 +6,7 @@
         *ngFor="let slide of slides; let i = index"
         class="carousel-slide"
         [class.active]="i === currentSlide"
-        [style.backgroundImage]="'url(' + slide.image + ')'"
+          [style.backgroundImage]="getBackground(slide)"
       >
         <div class="slide-overlay"></div>
         <div class="slide-content">

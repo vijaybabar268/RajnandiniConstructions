@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-carousel-slider',
@@ -12,35 +13,50 @@ export class CarouselSliderComponent implements OnInit {
       id: 1,
       title: 'Residential Complex - Phase 1',
       description: 'Modern residential complex with 200+ units',
-      image: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 600%22%3E%3Crect fill=%22%234A90E2%22 width=%221200%22 height=%22600%22/%3E%3Ctext x=%22600%22 y=%22300%22 font-size=%2248%22 fill=%22white%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EResidential Complex%3C/text%3E%3C/svg%3E',
+      image: 'assets/images/construction1.svg',
       badge: 'Active'
     },
     {
       id: 2,
       title: 'Commercial Plaza',
       description: 'Premium commercial space in business district',
-      image: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 600%22%3E%3Crect fill=%22%2350C878%22 width=%221200%22 height=%22600%22/%3E%3Ctext x=%22600%22 y=%22300%22 font-size=%2248%22 fill=%22white%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3ECommercial Plaza%3C/text%3E%3C/svg%3E',
+      image: 'assets/images/construction2.svg',
       badge: 'In Progress'
     },
     {
       id: 3,
       title: 'Educational Institution',
       description: 'World-class school building with modern facilities',
-      image: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 600%22%3E%3Crect fill=%22%23FF6B6B%22 width=%221200%22 height=%22600%22/%3E%3Ctext x=%22600%22 y=%22300%22 font-size=%2248%22 fill=%22white%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EEducational Institution%3C/text%3E%3C/svg%3E',
+      image: 'assets/images/construction3.svg',
       badge: 'Completed'
     },
     {
       id: 4,
       title: 'Shopping Mall Extension',
       description: 'Expansion of existing shopping complex',
-      image: 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 600%22%3E%3Crect fill=%22%23FFD93D%22 width=%221200%22 height=%22600%22/%3E%3Ctext x=%22600%22 y=%22300%22 font-size=%2248%22 fill=%22white%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3EShopping Mall%3C/text%3E%3C/svg%3E',
+      image: 'assets/images/construction1.svg',
       badge: 'Completed'
+    }
+    ,
+    {
+      id: 5,
+      title: 'Rooftop Garden',
+      description: 'Green rooftop with seating and planters',
+      image: 'assets/images/construction2.svg',
+      badge: 'Active'
+    },
+    {
+      id: 6,
+      title: 'Lakeside Villas',
+      description: 'Luxury villas overlooking a lake',
+      image: 'assets/images/construction3.svg',
+      badge: 'In Progress'
     }
   ];
 
   currentSlide = 0;
 
-  constructor() { }
+  constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.autoSlide();
@@ -62,5 +78,9 @@ export class CarouselSliderComponent implements OnInit {
     setInterval(() => {
       this.nextSlide();
     }, 5000); // Change slide every 5 seconds
+  }
+
+  getBackground(slide: any): SafeStyle {
+    return this.sanitizer.bypassSecurityTrustStyle(`url('${slide.image}')`);
   }
 }
