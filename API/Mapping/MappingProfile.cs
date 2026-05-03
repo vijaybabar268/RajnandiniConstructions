@@ -17,6 +17,8 @@ public class MappingProfile : Profile
 
         CreateMap<Photo, PhotoDto>();
 
+        CreateMap<Slide, SlideDto>();
+
         // DTOs to Domains
         CreateMap<Site, SiteDto>().ReverseMap();
     }

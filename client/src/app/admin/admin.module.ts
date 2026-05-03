@@ -26,6 +26,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { SiteFormComponent } from './site-form/site-form.component';
 import { SiteListComponent } from './site-list/site-list.component';
 import { SiteViewComponent } from './site-view/site-view.component';
+import { SliderListComponent } from './components/slider-list/slider-list.component';
+import { SliderFormComponent } from './components/slider-form/slider-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -38,7 +40,10 @@ const routes: Routes = [
       { path: 'sites', component: SiteListComponent },
       { path: 'sites/new', component: SiteFormComponent },
       { path: 'sites/:id', component: SiteFormComponent },
-      { path: 'sites/view/:id', component: SiteViewComponent }
+      { path: 'sites/view/:id', component: SiteViewComponent },
+      { path: 'sliders', component: SliderListComponent },
+      { path: 'sliders/new', component: SliderFormComponent },
+      { path: 'sliders/:id', component: SliderFormComponent }
     ]
   }
 ];
@@ -51,7 +56,9 @@ const routes: Routes = [
     AdminNavbarComponent,
     SiteFormComponent,
     SiteListComponent,
-    SiteViewComponent    
+    SiteViewComponent,
+    SliderListComponent,
+    SliderFormComponent    
   ],
   imports: [
     CommonModule,

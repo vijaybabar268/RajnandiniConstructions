@@ -31,7 +31,6 @@ export class AuthComponent implements OnInit {
 
     this.authService.login(this.model).subscribe({
       next: (res) => {
-        debugger
         // Store user in localStorage
         localStorage.setItem('user', JSON.stringify(res));
         this.loading = false;

@@ -14,4 +14,5 @@ public class DataContext : DbContext
     public DbSet<Site> Sites { get; set; }
     public DbSet<Status> Status { get; set; }
     public DbSet<Photo> Photos { get; set; }
+    public DbSet<Slide> Slides { get; set; }
 }

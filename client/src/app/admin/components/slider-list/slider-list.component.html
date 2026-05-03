@@ -1,0 +1,38 @@
+<div style="width: 50%; margin: 0 auto;">
+    <h4 class="text-center">Slider List</h4>
+
+    <p class="mt-4">
+        <a [routerLink]="['/admin/sliders/new']" class="btn btn-primary">New Slide</a>
+    </p>
+
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>                
+                <th>Slide</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let slide of sliders">                                
+                <td class="text-center">
+                    <img src="https://localhost:5001/uploads/admin/sliders/{{slide.url}}" class="img-thumbnail" height="180px" width="180px"/>
+                </td>
+                <td>{{ slide.title }}</td>
+                <td>{{ slide.description }}</td>
+                <td class="text-center">
+                    <a class="btn btn-link" (click)="toggleStatus(slide.id)">
+                        <span style="background: green; color: #fff; border-radius: 15px; padding: 4px 10px; display: inline-block;" *ngIf="slide.isActive">Toggle inactive</span>
+                        <span style="background: orangered; color: #fff; border-radius: 15px; padding: 4px 10px; display: inline-block;" *ngIf="!slide.isActive">Toggle active</span>
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a class="btn btn-primary" [routerLink]="['/admin/sliders/', slide.id]">Edit</a> &nbsp;
+                    <a class="btn btn-danger" (click)="delete(slide.id)">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

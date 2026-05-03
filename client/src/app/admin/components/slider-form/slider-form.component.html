@@ -1,0 +1,21 @@
+<div style="width: 50%; margin: 0 auto;">
+
+    <h3>{{ title }} Slider</h3>
+
+    <form #f="ngForm" (ngSubmit)="save()">
+        <div class="form-group mb-3">
+            <label for="title">Title</label>
+            <input type="text" id="title" class="form-control" [(ngModel)]="slide.title" name="title" />
+        </div>
+        <div class="form-group mb-3">
+            <label for="description">Description</label>
+            <input type="text" id="description" class="form-control" [(ngModel)]="slide.description" name="description"/>
+        </div>
+        <div class="form-group mb-5">
+            <label class="mb-2">Upload Slider Image</label><br/>
+            <input type="file" name="file" accept="image/*" #fileInput/>
+        </div>
+        <button class="btn btn-primary me-2">Save</button>
+        <button type="button" class="btn btn-warning" routerLink="/admin/sliders">Cancel</button>
+    </form>
+</div>
