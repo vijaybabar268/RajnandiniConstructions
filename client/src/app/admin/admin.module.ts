@@ -23,11 +23,11 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
-import { SiteFormComponent } from './site-form/site-form.component';
-import { SiteListComponent } from './site-list/site-list.component';
-import { SiteViewComponent } from './site-view/site-view.component';
 import { SliderListComponent } from './components/slider-list/slider-list.component';
 import { SliderFormComponent } from './components/slider-form/slider-form.component';
+import { SiteListComponent } from './components/site-list/site-list.component';
+import { SiteFormComponent } from './components/site-form/site-form.component';
+import { SiteViewComponent } from './components/site-view/site-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },

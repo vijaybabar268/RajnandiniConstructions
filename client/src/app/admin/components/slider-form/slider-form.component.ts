@@ -17,7 +17,7 @@ export class SliderFormComponent {
     route.params.subscribe(p => {
       var id = (isNaN(Number(p['id']))) ? 0 : Number(p['id']);
       this.slide.id = id;
-      this.title = (this.slide.id > 0) ? "Edit": "New";
+      this.title = (this.slide.id > 0) ? "Edit": "Add";
     })
   }
 

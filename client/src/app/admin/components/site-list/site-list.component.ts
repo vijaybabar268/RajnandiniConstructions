@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SiteService } from '../_services/site.service';
 import { Router } from '@angular/router';
+import { SiteService } from '../../_services/site.service';
 
 @Component({
   selector: 'app-site-list',

@@ -179,103 +179,11 @@ public class SliderController : ControllerBase
             System.IO.File.Delete(path);
     }
 
-    // [HttpPost]
-    // [Consumes("multipart/form-data")]
-    // public async Task<IActionResult> CreateSlider([FromForm]SlideRequestDto requestDto)
-    // {
-    //     if (requestDto.File == null)
-    //         return BadRequest("Null file");
+    [HttpGet("active-sliders")]
+    public async Task<IEnumerable<SlideDto>> GetActiveSliders()
+    {
+        var sliders = await _context.Slides.Where(a => a.IsActive == true).ToListAsync();
 
-    //     if (requestDto.File.Length == 0)
-    //         return BadRequest("Empty file");
-
-    //     if (requestDto.File.Length > _photoSettings.Value.MaxBytes)
-    //         return BadRequest("Max file size exceeded");
-
-    //     if (!_photoSettings.Value.IsSupported(requestDto.File.FileName))
-    //         return BadRequest("Invalid file type");
-
-    //     var uploadPolderPath = Path.Combine(_host.ContentRootPath, "uploads/admin/sliders");
-    //     if (!Directory.Exists(uploadPolderPath))
-    //         Directory.CreateDirectory(uploadPolderPath);
-
-    //     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(requestDto.File.FileName);
-    //     var filePath = Path.Combine(uploadPolderPath, fileName);
-
-    //     using (var stream = new FileStream(filePath, FileMode.Create))
-    //     {
-    //         await requestDto.File.CopyToAsync(stream);
-    //     }
-
-    //     var slider = new Slide
-    //     {
-    //         Title = requestDto.Title,
-    //         Description = requestDto.Description,
-    //         Url = fileName,
-    //         IsActive = true
-    //     };
-    //     _context.Slides.Add(slider);
-    //     await _context.SaveChangesAsync();
-
-    //     return Ok(_mapper.Map<Slide, SlideDto>(slider));
-    // }
-
-    // [HttpPut("{id:int}")]
-    // // [Consumes("multipart/form-data")]
-    // public async Task<IActionResult> UpdateSlider(int id, [FromBody]SaveSliderDto saveSliderDto)
-    // {
-    //     if (!ModelState.IsValid)
-    //         return BadRequest(ModelState);
-
-    //     if (saveSliderDto.File != null)
-    //     {
-    //         if (saveSliderDto.File.Length == 0)
-    //             return BadRequest("Empty file");
-
-    //         if (saveSliderDto.File.Length > _photoSettings.Value.MaxBytes)
-    //             return BadRequest("Max file size exceeded");
-
-    //         if (!_photoSettings.Value.IsSupported(saveSliderDto.File.FileName))
-    //             return BadRequest("Invalid file type");
-
-    //         var uploadPolderPath = Path.Combine(_host.ContentRootPath, "uploads/admin/sliders");
-    //         if (!Directory.Exists(uploadPolderPath))
-    //             Directory.CreateDirectory(uploadPolderPath);
-
-    //         var fileName = Guid.NewGuid().ToString() + Path.GetExtension(saveSliderDto.File.FileName);
-    //         var filePath = Path.Combine(uploadPolderPath, fileName);
-
-    //         using (var stream = new FileStream(filePath, FileMode.Create))
-    //         {
-    //             await saveSliderDto.File.CopyToAsync(stream);
-    //         }
-
-    //         var sliderInDb = await _context.Slides.FindAsync(id);
-    //         // _mapper.Map(saveSliderDto, sliderInDb);
-    //         sliderInDb.Title = saveSliderDto.Title;
-    //         sliderInDb.Description = saveSliderDto.Description;
-    //         sliderInDb.IsActive = saveSliderDto.IsActive;
-    //         sliderInDb.Url = fileName;
-
-    //         _context.Entry(sliderInDb).State = EntityState.Modified;
-    //         await _context.SaveChangesAsync();
-    //     }    
-    //     else
-    //     {
-    //         var slider = await _context.Slides.FindAsync(id);
-    //         if (slider == null)
-    //             return NotFound();
-
-    //         // _mapper.Map(saveSliderDto, slider);
-    //         slider.Title = saveSliderDto.Title;
-    //         slider.Description = saveSliderDto.Description;
-    //         slider.IsActive = saveSliderDto.IsActive;
-    //         slider.Url = saveSliderDto.Url;
-
-    //         _context.Entry(slider).State = EntityState.Modified;
-    //         await _context.SaveChangesAsync();
-    //     }
-
-    //     return NoContent();
-    // }
+        return _mapper.Map<IEnumerable<Slide>, IEnumerable<SlideDto>>(sliders);
+    }
 }

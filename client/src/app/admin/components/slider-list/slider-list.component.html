@@ -1,17 +1,17 @@
-<div style="width: 50%; margin: 0 auto;">
-    <h4 class="text-center">Slider List</h4>
+<div style="width: 80%; margin: 0 auto;">
+    <h4 class="text-center">Manage Sliders</h4>
 
     <p class="mt-4">
-        <a [routerLink]="['/admin/sliders/new']" class="btn btn-primary">New Slide</a>
+        <a [routerLink]="['/admin/sliders/new']" class="btn btn-primary">Add</a>
     </p>
 
     <table class="table table-bordered mt-4">
         <thead>
             <tr>                
-                <th>Slide</th>
+                <th class="text-center">Slider</th>
                 <th>Title</th>
                 <th>Description</th>
-                <th class="text-center">Status</th>
+                <th class="text-center">Toggle Status</th>
                 <th class="text-center">Action</th>
             </tr>
         </thead>
@@ -24,8 +24,8 @@
                 <td>{{ slide.description }}</td>
                 <td class="text-center">
                     <a class="btn btn-link" (click)="toggleStatus(slide.id)">
-                        <span style="background: green; color: #fff; border-radius: 15px; padding: 4px 10px; display: inline-block;" *ngIf="slide.isActive">Toggle inactive</span>
-                        <span style="background: orangered; color: #fff; border-radius: 15px; padding: 4px 10px; display: inline-block;" *ngIf="!slide.isActive">Toggle active</span>
+                        <span style="background: green; color: #fff; border-radius: 15px; display: inline-block; padding: 5px 15px;" *ngIf="slide.isActive">Active</span>
+                        <span style="background: orangered; color: #fff; border-radius: 15px; display: inline-block; padding: 5px 15px;" *ngIf="!slide.isActive">Inactive</span>
                     </a>
                 </td>
                 <td class="text-center">

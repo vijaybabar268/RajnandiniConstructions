@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { SiteService } from '../_services/site.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PhotoService } from '../_services/photo.service';
+import { SiteService } from '../../_services/site.service';
+import { PhotoService } from '../../_services/photo.service';
 
 @Component({
   selector: 'app-site-view',

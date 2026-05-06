@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { SliderService } from 'src/app/admin/_services/slider.service';
+import { HomeService } from 'src/app/public/_services/home.service';
 
 @Component({
   selector: 'app-carousel-slider',
@@ -11,7 +11,7 @@ export class CarouselSliderComponent implements OnInit {
   slides: any = [];
   currentSlide = 0;
 
-  constructor(private sanitizer: DomSanitizer, private sliderService: SliderService) { }
+  constructor(private sanitizer: DomSanitizer, private homeService: HomeService) { }
 
   ngOnInit(): void {
     this.getSliders();
@@ -19,7 +19,7 @@ export class CarouselSliderComponent implements OnInit {
   }
 
   getSliders() {
-    this.sliderService.getSliders().subscribe({
+    this.homeService.getActiveSliders().subscribe({
       next: (res) => {
         this.slides = res;
         console.log(res);

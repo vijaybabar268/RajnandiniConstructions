@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SiteService } from '../_services/site.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SiteService } from '../../_services/site.service';
 
 @Component({
   selector: 'app-site-form',
@@ -15,7 +15,7 @@ export class SiteFormComponent implements OnInit {
     route.params.subscribe(p => {
       var id = (isNaN(Number(p['id']))) ? 0 : Number(p['id']);
       this.site.id = id;
-      this.title = (this.site.id > 0) ? "Edit": "New";
+      this.title = (this.site.id > 0) ? "Edit": "Add";
     })
   }
 
