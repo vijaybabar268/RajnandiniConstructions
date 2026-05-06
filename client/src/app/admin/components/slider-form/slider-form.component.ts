@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SliderFormComponent {
   slide: any = {};
+  selectedFile: File | null = null;
   title: string = "";
   @ViewChild('fileInput') fileInput!: ElementRef;
     
@@ -32,42 +33,47 @@ export class SliderFormComponent {
       })
     }
   }
-    
-  // save() {
-  //   var result$ = this.slide.id != 0 ? this.sliderService.update(this.slide) : this.sliderService.create(this.slide);
-  //   result$.subscribe({
-  //     next: (res) => {
-  //       this.slide = res;
-  //       this.router.navigateByUrl('/admin/sliders');
-  //     },
-  //     error: (err) => console.log("Error: ", err),
-  //     complete: () => console.log("Request completed")
-  //   })
-  // }
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+
+  buildFormData(): FormData {
+    const formData = new FormData();
+
+    formData.append('Title', this.slide.title);
+    formData.append('Description', this.slide.description);
+
+    if (this.selectedFile) {
+      formData.append('File', this.selectedFile);
+    }
+
+    return formData;
+  }
 
   save() {
-    var nativeElement: HTMLInputElement = this.fileInput.nativeElement;
-    const files = nativeElement.files;
-    if (files && files.length > 0) {
-      const file = files[0];
-      this.sliderService.upload(this.slide, file).subscribe({
-        next: x => {
-          console.log(x);
+    const formData = this.buildFormData();
+
+    if (this.slide.id === 0) {
+      // CREATE
+      this.sliderService.createSlider(formData).subscribe({
+        next: res => {
+          console.log('Created:', res);
           this.router.navigateByUrl('/admin/sliders');
         },
-        error: err => {
-          alert('Error while uploading photos: ' + err);
-        }
+        error: err => console.error(err)
       });
     } else {
-      // no file selected - create or update slide without uploading a file
-      const result$ = this.slide.id && this.slide.id !== 0 ? this.sliderService.update(this.slide) : this.sliderService.create(this.slide);
-      result$.subscribe({
-        next: res => {
-          this.slide = res;
+      // UPDATE
+      this.sliderService.updateSlider(this.slide.id, formData).subscribe({
+        next: () => {
+          console.log('Updated');
           this.router.navigateByUrl('/admin/sliders');
         },
-        error: err => console.log('Error: ', err)
+        error: err => console.error(err)
       });
     }
   }

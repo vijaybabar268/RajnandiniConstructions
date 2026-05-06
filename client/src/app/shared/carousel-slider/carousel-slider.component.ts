@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
+import { SliderService } from 'src/app/admin/_services/slider.service';
 
 @Component({
   selector: 'app-carousel-slider',
@@ -7,59 +8,25 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
   styleUrls: ['./carousel-slider.component.css']
 })
 export class CarouselSliderComponent implements OnInit {
-  
-  slides = [
-    {
-      id: 1,
-      title: 'Residential Complex - Phase 1',
-      description: 'Modern residential complex with 200+ units',
-      image: 'assets/images/construction1.svg',
-      badge: 'Active'
-    },
-    {
-      id: 2,
-      title: 'Commercial Plaza',
-      description: 'Premium commercial space in business district',
-      image: 'assets/images/construction2.svg',
-      badge: 'In Progress'
-    },
-    {
-      id: 3,
-      title: 'Educational Institution',
-      description: 'World-class school building with modern facilities',
-      image: 'assets/images/construction3.svg',
-      badge: 'Completed'
-    },
-    {
-      id: 4,
-      title: 'Shopping Mall Extension',
-      description: 'Expansion of existing shopping complex',
-      image: 'assets/images/construction1.svg',
-      badge: 'Completed'
-    }
-    ,
-    {
-      id: 5,
-      title: 'Rooftop Garden',
-      description: 'Green rooftop with seating and planters',
-      image: 'assets/images/construction2.svg',
-      badge: 'Active'
-    },
-    {
-      id: 6,
-      title: 'Lakeside Villas',
-      description: 'Luxury villas overlooking a lake',
-      image: 'assets/images/construction3.svg',
-      badge: 'In Progress'
-    }
-  ];
-
+  slides: any = [];
   currentSlide = 0;
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer, private sliderService: SliderService) { }
 
   ngOnInit(): void {
+    this.getSliders();
     this.autoSlide();
+  }
+
+  getSliders() {
+    this.sliderService.getSliders().subscribe({
+      next: (res) => {
+        this.slides = res;
+        console.log(res);
+      },
+      error: (err) => console.log("Error: ", err),
+      complete: () => console.log("Request completed")
+    })
   }
 
   nextSlide(): void {
@@ -77,10 +44,12 @@ export class CarouselSliderComponent implements OnInit {
   autoSlide(): void {
     setInterval(() => {
       this.nextSlide();
-    }, 5000); // Change slide every 5 seconds
+    }, 5000);
   }
 
-  getBackground(slide: any): SafeStyle {
-    return this.sanitizer.bypassSecurityTrustStyle(`url('${slide.image}')`);
+  getBackground(slide: any) {
+    if (!slide || !slide.url) return '';
+    const url = `url('https://localhost:5001/uploads/admin/sliders/${slide.url}')`;
+    return this.sanitizer.bypassSecurityTrustStyle(url);
   }
 }
