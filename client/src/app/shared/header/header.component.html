@@ -1,7 +1,25 @@
 <nav [ngClass]="{'navbar-admin': isAdminSection, 'navbar': !isAdminSection}" class="navbar-expand-lg navbar-dark shadow-sm">
-  <div class="container-fluid px-3">
+  <div class="container-fluid px-3" style="text-transform: uppercase;">
     <!-- Brand -->
-    <a routerLink="/" routerLinkActive="active" class="navbar-brand fw-bold" href="#">Rajnandini Constructions</a>
+    <a routerLink="/" routerLinkActive="active" class="navbar-brand fw-bold" style="margin-right: 200px;">Rajnandini Constructions</a>
+
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+          <a routerLink="/admin/login" routerLinkActive="active" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/admin/login" routerLinkActive="active" class="nav-link">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/admin/login" routerLinkActive="active" class="nav-link">Services</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/admin/login" routerLinkActive="active" class="nav-link">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/admin/login" routerLinkActive="active" class="nav-link">Contact Us</a>
+        </li>
+    </ul>
 
     <!-- Navigation Items (Hidden in Admin) -->
     <div class="collapse navbar-collapse" id="navbarNav" *ngIf="!isAdminSection">
