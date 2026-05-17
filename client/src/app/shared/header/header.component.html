@@ -5,19 +5,19 @@
 
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
       <li class="nav-item">
-          <a routerLink="/" routerLinkActive="active" class="nav-link">Home</a>
+          <a routerLink="/" [class.active]="activeSection==='home'" routerLinkActive="active" class="nav-link" (click)="goHome()">Home</a>
         </li>
         <li class="nav-item">
-          <a href="#about" routerLinkActive="active" class="nav-link">About Us</a>
+          <a href="#about" [class.active]="activeSection==='about'" routerLinkActive="active" class="nav-link">About Us</a>
         </li>
         <li class="nav-item">
           <a href="#services" routerLinkActive="active" class="nav-link">Services</a>
         </li>
         <li class="nav-item">
-          <a href="#sites" routerLinkActive="active" class="nav-link">Projects</a>
+          <a href="#sites" [class.active]="activeSection==='sites'" routerLinkActive="active" class="nav-link">Projects</a>
         </li>
         <li class="nav-item">
-          <a href="#contact" routerLinkActive="active" class="nav-link">Contact Us</a>
+          <a href="#contact" [class.active]="activeSection==='contact'" routerLinkActive="active" class="nav-link">Contact Us</a>
         </li>
     </ul>
 

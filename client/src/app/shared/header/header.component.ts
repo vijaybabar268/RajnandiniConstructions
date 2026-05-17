@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   isAdminSection: boolean = false;
   private routerSubscription: Subscription | null = null;
+  activeSection: string = 'home';
 
   constructor(private router: Router) { }
 
@@ -25,6 +26,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.checkLoginStatus();
         this.checkIfAdminSection();
       });
+  }
+
+  @HostListener('window:scroll', [])
+  onScroll() {
+    const scrollPos = window.scrollY;
+
+    if (scrollPos < 500) {
+      this.activeSection = 'home';
+    } else if (scrollPos < 1200) {
+      this.activeSection = 'about';
+    } else if (scrollPos < 1900) {
+      this.activeSection = 'sites';
+    } else {
+      this.activeSection = 'contact';
+    }
+  }
+
+  setActive(section: string) {
+    this.activeSection = section;
+    document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
   }
 
   checkLoginStatus(): void {
@@ -50,6 +71,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();
     }
+  }
+
+  goHome() {
+    this.router.navigate(['/']).then(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   }
 
 }
