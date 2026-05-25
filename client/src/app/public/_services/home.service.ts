@@ -12,4 +12,9 @@ export class HomeService {
   getActiveSliders() {
     return this.http.get(`${this.baseUrl}slider/active-sliders`);
   }
+
+  saveContactUs(contact: any) {
+    return this.http.post(`${this.baseUrl}contactus`, contact);
+  }
+
 }

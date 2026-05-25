@@ -78,31 +78,7 @@
     </div>
   </section>
 
-  <!-- Statistics Section -->
-  <!-- <section class="py-5 bg-primary text-white">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-md-3 mb-4">
-          <h3 class="display-6">50+</h3>
-          <p class="lead">Sites Completed</p>
-        </div>
-        <div class="col-md-3 mb-4">
-          <h3 class="display-6">1000+</h3>
-          <p class="lead">Happy Clients</p>
-        </div>
-        <div class="col-md-3 mb-4">
-          <h3 class="display-6">15+</h3>
-          <p class="lead">Years Experience</p>
-        </div>
-        <div class="col-md-3 mb-4">
-          <h3 class="display-6">100%</h3>
-          <p class="lead">Client Satisfaction</p>
-        </div>
-      </div>
-    </div>
-  </section> -->
-
-  <!-- CTA Section -->
+  <!-- Contact Section -->
   <section class="py-5 bg-light">
     <div id="contact" style="padding-top: 80px;"></div>
     <div class="container text-center">
@@ -110,43 +86,56 @@
       <p class="lead text-muted mb-4">Contact us today for a consultation with our expert team.</p>
 
       <div class="row" style="background-color: #87ceeb33; padding: 20px 20px; text-align: center; width: 50%; margin: 0 auto; border-radius: 15px;">
-        <form>
-           <div class="form-group mb-2">
+        <form #f="ngForm" (ngSubmit)="submit(f)" novalidate>           
+          <div class="form-group mb-2">
             <div class="col-md-2" style="text-align: left;">
-              <label for="exampleInputEmail1">Full Name</label>
+              <label for="name">Full Name</label>
             </div>
             <div class="col-md-10" style="width: 100%;">
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input id="fullName" name="fullName" [(ngModel)]="contact.fullName" required #contactName="ngModel" type="text" class="form-control" placeholder="Enter your full name">
+              <div *ngIf="contactName.invalid && (contactName.touched || contactName.dirty)" class="text-danger" style="text-align: left;">
+                Full name is required
+              </div>
             </div>
           </div>
           
           <div class="form-group mb-2">
             <div class="col-md-2" style="text-align: left;">
-              <label for="exampleInputEmail1">Mobile</label>
+              <label for="mobile">Mobile</label>
             </div>
             <div class="col-md-10" style="width: 100%;">
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input id="mobile" name="mobile" [(ngModel)]="contact.mobile" required #contactMobile="ngModel" type="text" class="form-control" placeholder="Enter your mobile number">
+              <div *ngIf="contactMobile.invalid && (contactMobile.touched || contactMobile.dirty)" class="text-danger" style="text-align: left;">
+                Mobile number is required
+              </div>
             </div>
           </div>
           
           <div class="form-group mb-2">
             <div class="col-md-2" style="text-align: left;">
-              <label for="exampleInputEmail1">Email</label> 
+              <label for="email">Email</label> 
             </div>
             <div class="col-md-10" style="width: 100%;">
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input id="email" name="email" [(ngModel)]="contact.email" required #contactEmail="ngModel" type="email" class="form-control" placeholder="Enter your email address">
+              <div *ngIf="contactEmail.invalid && (contactEmail.touched || contactEmail.dirty)" class="text-danger" style="text-align: left;">
+                Email address is required
+              </div>
             </div>
           </div>
           
           <div class="form-group mb-4">
             <div class="col-md-2" style="text-align: left;">
-              <label for="exampleFormControlTextarea1">Message</label>
+              <label for="message">Message</label>
             </div>
             <div class="col-md-10" style="width: 100%;">
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <textarea id="message" name="message" [(ngModel)]="contact.message" required #contactMessage="ngModel" type="message" class="form-control" placeholder="Enter your message" rows="3"></textarea>
+              <div *ngIf="contactMessage.invalid && (contactMessage.touched || contactMessage.dirty)" class="text-danger" style="text-align: left;">
+                Message is required
+              </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <p style="padding: 5px; color: green;">{{ this.message }}</p>
+          <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Submit</button>          
         </form>
       </div>
       

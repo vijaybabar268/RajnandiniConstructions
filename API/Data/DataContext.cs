@@ -15,4 +15,5 @@ public class DataContext : DbContext
     public DbSet<Status> Status { get; set; }
     public DbSet<Photo> Photos { get; set; }
     public DbSet<Slide> Slides { get; set; }
+    public DbSet<Contact> Contacts { get; set; }
 }
