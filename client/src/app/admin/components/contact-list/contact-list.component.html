@@ -1,0 +1,31 @@
+<div style="width: 80%; margin: 0 auto;">
+    <h4 class="text-center">Manage Contact Us</h4>
+
+    <!-- <p class="mt-4">
+        <a [routerLink]="['/admin/sliders/new']" class="btn btn-primary">Add</a>
+    </p> -->
+
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>                
+                <th>Full Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let contact of contacts">
+                <td>{{ contact.fullName }}</td>
+                <td>{{ contact.mobile }}</td>
+                <td>{{ contact.email }}</td>                                
+                <td>{{ contact.message }}</td>               
+                <td class="text-center">
+                    <!-- <a class="btn btn-primary" [routerLink]="['/admin/sliders/', slide.id]">Edit</a> &nbsp;
+                    <a class="btn btn-danger" (click)="delete(slide.id)">Delete</a> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

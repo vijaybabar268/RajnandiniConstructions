@@ -28,6 +28,7 @@ import { SliderFormComponent } from './components/slider-form/slider-form.compon
 import { SiteListComponent } from './components/site-list/site-list.component';
 import { SiteFormComponent } from './components/site-form/site-form.component';
 import { SiteViewComponent } from './components/site-view/site-view.component';
+import { ContactListComponent } from './components/contact-list/contact-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -43,7 +44,8 @@ const routes: Routes = [
       { path: 'sites/view/:id', component: SiteViewComponent },
       { path: 'sliders', component: SliderListComponent },
       { path: 'sliders/new', component: SliderFormComponent },
-      { path: 'sliders/:id', component: SliderFormComponent }
+      { path: 'sliders/:id', component: SliderFormComponent },
+      { path: 'contact', component: ContactListComponent }
     ]
   }
 ];
@@ -58,7 +60,8 @@ const routes: Routes = [
     SiteListComponent,
     SiteViewComponent,
     SliderListComponent,
-    SliderFormComponent    
+    SliderFormComponent,
+    ContactListComponent
   ],
   imports: [
     CommonModule,
