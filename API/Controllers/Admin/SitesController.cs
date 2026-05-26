@@ -23,7 +23,7 @@ public class SitesController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<SiteDto>>> GetSites()
     {
-        var sites = await _context.Sites.Include(s => s.Status).ToListAsync();
+        var sites = await _context.Sites.Include(s => s.Status).Include(p => p.Photos).ToListAsync();
         var result = _mapper.Map<IEnumerable<SiteDto>>(sites);
 
         return Ok(result);

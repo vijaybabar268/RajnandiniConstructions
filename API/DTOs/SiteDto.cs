@@ -1,3 +1,7 @@
+using API.Entities;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+
 namespace API.DTOs;
 
 public class SiteDto
@@ -10,4 +14,6 @@ public class SiteDto
     
     public int StatusId { get; set; }
     public StatusDto Status { get; set; }
+
+    public ICollection<PhotoDto> Photos { get; set; } = new Collection<PhotoDto>();
 }

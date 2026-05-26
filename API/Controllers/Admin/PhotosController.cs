@@ -54,7 +54,7 @@ public class PhotosController : ControllerBase
         if (!_photoSettings.Value.IsSupported(file.FileName))
             return BadRequest("Invalid file type");
 
-        var uploadPolderPath = Path.Combine(_host.ContentRootPath, "uploads/admin");
+        var uploadPolderPath = Path.Combine(_host.ContentRootPath, "uploads/admin/projects");
         if (!Directory.Exists(uploadPolderPath))
             Directory.CreateDirectory(uploadPolderPath);
 

@@ -17,4 +17,8 @@ export class HomeService {
     return this.http.post(`${this.baseUrl}contactus`, contact);
   }
 
+  getProjects() {
+    return this.http.get(`${this.baseUrl}sites`);
+  }
+
 }

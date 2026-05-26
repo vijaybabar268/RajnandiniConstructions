@@ -28,7 +28,7 @@
       <h5 class="mt-3">Add Photos</h5>
       <input type="file" (change)="uploadPhoto()" #fileInput/>
       <hr/>
-      <img *ngFor="let photo of photos" src="https://localhost:5001/uploads/admin/{{photo.filename}}" 
+      <img *ngFor="let photo of photos" src="https://localhost:5001/uploads/admin/projects/{{photo.filename}}" 
         class="img-fluid img-thumbnail"/>
     </div>
   </div>
