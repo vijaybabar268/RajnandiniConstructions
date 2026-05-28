@@ -15,5 +15,7 @@ public class SiteDto
     public int StatusId { get; set; }
     public StatusDto Status { get; set; }
 
+    public bool IsActive { get; set; }
+
     public ICollection<PhotoDto> Photos { get; set; } = new Collection<PhotoDto>();
 }

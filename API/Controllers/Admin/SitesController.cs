@@ -21,12 +21,11 @@ public class SitesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<SiteDto>>> GetSites()
+    public async Task<IEnumerable<SiteDto>> GetSites()
     {
         var sites = await _context.Sites.Include(s => s.Status).Include(p => p.Photos).ToListAsync();
-        var result = _mapper.Map<IEnumerable<SiteDto>>(sites);
-
-        return Ok(result);
+        
+        return _mapper.Map<IEnumerable<Site>, IEnumerable<SiteDto>>(sites);
     }
 
     [HttpGet("{id:int}")]
@@ -97,6 +96,32 @@ public class SitesController : ControllerBase
         await _context.SaveChangesAsync();
 
         return NoContent();
+    }
+
+    [HttpPut("toggle-site")]
+    public async Task<IActionResult> ToggleSite(int id)
+    {
+        var site = await _context.Sites.FirstOrDefaultAsync(x => x.Id == id);
+        if (site == null)
+            return NotFound();
+
+        if (site.IsActive)
+            site.IsActive = false;
+        else
+            site.IsActive = true;
+
+        _context.Entry(site).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+
+        return Ok();
+    }
+
+    [HttpGet("get-active-sites")]
+    public async Task<IEnumerable<SiteDto>> GetActiveSites()
+    {
+        var sites = await _context.Sites.Where(a => a.IsActive == true).Include(s => s.Status).Include(p => p.Photos).ToListAsync();
+
+        return _mapper.Map<IEnumerable<Site>, IEnumerable<SiteDto>>(sites);
     }
 }
 

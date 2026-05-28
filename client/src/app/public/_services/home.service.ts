@@ -18,7 +18,7 @@ export class HomeService {
   }
 
   getProjects() {
-    return this.http.get(`${this.baseUrl}sites`);
+    return this.http.get(`${this.baseUrl}sites/get-active-sites`);
   }
 
 }

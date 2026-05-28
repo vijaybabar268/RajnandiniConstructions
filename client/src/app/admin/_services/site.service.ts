@@ -29,4 +29,8 @@ export class SiteService {
   delete(id: number) {
     return this.http.delete(this.baseUrl + 'sites/' + id);
   }
+
+  toggleStatus(id: number) {
+    return this.http.put(this.baseUrl + 'sites/toggle-site?id=' + id, {})
+  }
 }
